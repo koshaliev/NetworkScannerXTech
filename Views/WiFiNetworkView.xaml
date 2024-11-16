@@ -1,0 +1,97 @@
+﻿<Window x:Class="NetworkScannerXTech.WiFiNetworkView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetworkScannerXTech" 
+        xmlns:vms="clr-namespace:NetworkScannerXTech.ViewModels"
+        mc:Ignorable="d"
+        Title="WiFi Network" 
+        Height="450" Width="400"
+        MinHeight="450" MinWidth="400"
+        FontFamily="Arial"
+        >
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="140"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <TranslateTransform X="0.3" Y="0.3"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center" Margin="20,15,10,15">
+                <Button Style="{StaticResource ButtonStyle}"
+                    Content="Сканировать" 
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left" 
+                    Margin="0,0,0,10"
+                    Background="#FF87E284"
+                    Command="{Binding ScanNetworksAsyncCommand}"/>
+
+                <Button Style="{StaticResource ButtonStyle}"
+                    Content="Сохранить" 
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left" 
+                    Background="#FF8DE4DE"
+                    Command="{Binding SaveToDatabaseAsyncCommand}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" 
+                        Margin="10,0,20,0"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Сеть с лучшим сигналом:" FontWeight="Bold"
+                           Margin="0,0,0,5" />
+                <Border BorderThickness="0, 0.5, 0, 0" BorderBrush="#FF676767"/>
+                <TextBlock x:Name="bestNetworkTBlock" Text=""/>
+            </StackPanel>
+        </Grid>
+
+
+
+        <DataGrid   Grid.Row="1" IsReadOnly="True"
+                    ItemsSource="{Binding WiFiNetworks}" 
+                    ColumnHeaderHeight="30" 
+                    AutoGenerateColumns="False" 
+                    Background="LightGray"
+                    Margin="0"  
+                    BorderThickness="0,1,0,0"
+                    BorderBrush="#FF676767"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    CanUserResizeRows="False" 
+                    VerticalContentAlignment="Center"
+                    VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn  
+                                    Width="2*" Header="Название сети" 
+                                    Binding="{Binding Ssid}"/>
+                <DataGridTextColumn  
+                                    MinWidth="120" 
+                                    Header="Уровень сигнала" 
+                                    Binding="{Binding SignalStrength}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
