@@ -11,7 +11,7 @@ public class NetworkScannerService : INetworkScannerService
     {
         try
         {
-            await NativeWifi.ScanNetworksAsync(TimeSpan.FromSeconds(1));
+            await NativeWifi.ScanNetworksAsync(TimeSpan.FromSeconds(2)); // 2 секунды - оптимальное значение для поиска
             var scanResult = NativeWifi.EnumerateBssNetworks();
             
             var scannedNetworks = scanResult.Select(n => 
