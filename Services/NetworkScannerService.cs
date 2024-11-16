@@ -1,8 +1,6 @@
 ﻿using ManagedNativeWifi;
 using NetworkScannerXTech.Models;
 using NetworkScannerXTech.Shared;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NetworkScannerXTech.Services;
 public class NetworkScannerService : INetworkScannerService
@@ -11,9 +9,9 @@ public class NetworkScannerService : INetworkScannerService
     {
         try
         {
-            await NativeWifi.ScanNetworksAsync(TimeSpan.FromSeconds(2)); // 2 секунды - оптимальное значение для поиска
-            var scanResult = NativeWifi.EnumerateBssNetworks();
-            
+            await NativeWifi.ScanNetworksAsync(TimeSpan.FromSeconds(2)); // производим ручной поиск, чтобы "запустить" wifi-модуль.
+            var scanResult = NativeWifi.EnumerateBssNetworks(); // получаем список сетей
+
             var scannedNetworks = scanResult.Select(n => 
                 new WiFiNetwork { 
                     Bssid = n.Bssid.ToString(), 
