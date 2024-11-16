@@ -3,8 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:NetworkScannerXTech" 
-        xmlns:vms="clr-namespace:NetworkScannerXTech.ViewModels"
         mc:Ignorable="d"
         Title="WiFi Network" 
         Height="450" Width="400"
@@ -63,7 +61,7 @@
                 <TextBlock Text="Сеть с лучшим сигналом:" FontWeight="Bold"
                            Margin="0,0,0,5" />
                 <Border BorderThickness="0, 0.5, 0, 0" BorderBrush="#FF676767"/>
-                <TextBlock x:Name="bestNetworkTBlock" Text=""/>
+                <TextBlock Text="{Binding BestNetwork}"/>
             </StackPanel>
         </Grid>
 
