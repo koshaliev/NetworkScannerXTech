@@ -11,7 +11,7 @@ namespace NetworkScannerXTech;
 
 public partial class App : Application
 {
-    public IConfiguration Configuration { get; private set; }
+    public IConfiguration Configuration { get; }
     public IServiceProvider Services { get; }
     public new static App Current => (App)Application.Current;
 

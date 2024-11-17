@@ -15,9 +15,9 @@ public partial class WiFiNetworkViewModel : ObservableObject
     private readonly INetworkScannerService _networkScannerService;
 
     [ObservableProperty]
-    public ObservableCollection<WiFiNetwork> wiFiNetworks = new();
+    private ObservableCollection<WiFiNetwork> wiFiNetworks = new();
     [ObservableProperty]
-    public string bestNetwork = string.Empty;
+    private string bestNetwork = string.Empty;
 
     public event Action ChangeCursorToWait;
     public event Action ChangeCursorToDefault;
