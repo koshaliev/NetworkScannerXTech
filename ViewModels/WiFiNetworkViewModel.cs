@@ -45,6 +45,7 @@ public partial class WiFiNetworkViewModel : ObservableObject
         if (!scannedNetworksResult.IsSuccess)
         {
             _messageService.ShowError(scannedNetworksResult.Error);
+            ChangeCursorToDefault?.Invoke();
             return;
         }
         foreach (var network in scannedNetworksResult.Value)
